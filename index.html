@@ -250,7 +250,7 @@ main();</p>
             consoleLogElement.innerText += code;
 
             const defs = findClassDef(code);
-            const newDefs = array.map(element => {
+            const newDefs = defs.map(element => {
                 console.log(element);
                 return classDef(element);
             });
