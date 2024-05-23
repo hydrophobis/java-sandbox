@@ -200,7 +200,7 @@
             if (code == null){
                 try {
                     const element = document.getElementById('javaInput');
-                    const result = eval(element);
+                    const result = eval(element.value);
                     document.getElementById('output').innerText = result;
                 } catch (error) {
                     document.getElementById('output').innerText = 'Error: ' + error.message;
