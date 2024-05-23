@@ -193,6 +193,8 @@ main();</p>
         
             // Replace array access
             javaCode = javaCode.replace(/args\[(\d+)\]/g, "");
+
+            javaCode = javaCode.replace("public", "")
         
             return javaCode;
         }
