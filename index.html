@@ -234,7 +234,7 @@ main();</p>
         })();
 
         function runCode(code) {
-            code = parsejs(code);
+            code = parsejs(code); console.log(code);
             const consoleLogElement = document.getElementById('output');
             document.getElementById('output').innerText += "\n" + code;
             consoleLogElement.innerText += code;
