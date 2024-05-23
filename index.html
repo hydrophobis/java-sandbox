@@ -152,7 +152,7 @@
             // Add more replacements for other control structures...
         
             // Replace libraries and APIs
-            javaCode = javaCode.replace(/\bSystem.out.println\b/g, 'console.log');
+            javaCode = javaCode.replace(/System\.out\.println\((.*?)\);?/g, 'console.log($1);');
             // Add more replacements for other libraries and APIs...
         
             // Replace exceptions
