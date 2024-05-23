@@ -1,5 +1,5 @@
 // Define the basic Java language constructs
-const JavaConstructs = {
+export const JavaConstructs = {
     CLASS_DECLARATION: 'class',
     METHOD_DECLARATION: 'method',
     VARIABLE_DECLARATION: 'variable',
@@ -7,7 +7,7 @@ const JavaConstructs = {
 };
 
 // Function to parse Java code
-function parseJavaCode(javaCode) {
+export function parseJavaCode(javaCode) {
     // Split the code into lines
     const lines = javaCode.split('\n');
 
@@ -77,7 +77,7 @@ function parseJavaCode(javaCode) {
 }
 
 // Example Java code
-const javaCode = `
+export const javaCode = `
 public class HelloWorld {
     public static void main(String[] args) {
         String message = "Hello, World!";
@@ -87,7 +87,4 @@ public class HelloWorld {
 `;
 
 // Parse the Java code
-const parsedJavaCode = parseJavaCode(javaCode);
-
-// Display the parsed code
-console.log(parsedJavaCode);
+export const parsedJavaCode = parseJavaCode(javaCode);
