@@ -195,7 +195,8 @@
 
         function runCode(code) {
             code = parsejs(code);
-            console.log(code);
+            const consoleLogElement = document.getElementById('consoleLog');
+            consoleLogElement.innerText += code;
             if (code == null){
                 try {
                     const element = document.getElementById('javaInput');
