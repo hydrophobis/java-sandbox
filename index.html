@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Sandbox</title>
+    <style>
+        /* Light mode styles */
+        body.light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        textarea.light-mode, pre.light-mode {
+            background-color: #fff;
+            color: #000;
+        }
+
+        button.light-mode, pre.light-mode {
+            color: #000;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1a2424;
+            color: #d5f0e5;
+        }
+
+        textarea.dark-mode, pre.dark-mode {
+            background-color: #1a2424;
+            color: #d5f0e5;
+        }
+
+        button.dark-mode, pre.dark-mode {
+            color: #d5f0e5;
+        }
+
+        /* Common styles */
+        textarea, pre {
+            width: 100%;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+        }
+
+        button, pre {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            float: right;
+        }
+
+        textarea, pre {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <header>
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </header>
+    <h1>Java Sandbox</h1>
+    <textarea rows="20" id="javaInput" class="light-mode" placeholder="Type your Java code here..."></textarea>
+    <br>
+    <button id="runCodeButton" onclick="runCode()">Run Code</button>
+    <h2>Output:</h2>
+    <pre id="output" class="light-mode"></pre>
+    <h2>Console Log:</h2>
+    <pre id="consoleLog" class="light-mode"></pre>
+            <!-- Button to open folder -->
+    <button id="open-folder-button">Open Folder</button>
+
+    <!-- Button to download combined Java content -->
+    <button id="download-button" style="display: none;">Download Combined Java Content</button>
+
+    <!-- Output container -->
+    <pre id="output"></pre>
+
+    <!-- Include necessary libraries (e.g., javalang.js) -->
+    <!-- <script src="path/to/javalang.js"></script> -->
+    <script src="/lib/fs.js"></script>
+    <script src="/lib/javalang.js"></script>
+
+    <script>
+        document.getElementById('open-folder-button').addEventListener('click', async function() {
+            try {
+                // Open a directory picker
+                const directoryHandle = await window.showDirectoryPicker();
+                
+                // Get all Java files recursively
+                const javaFiles = [];
+                await getJavaFilesRecursively(directoryHandle, javaFiles);
+
+                // Read content from all Java files
+                const javaFileContents = await Promise.all(javaFiles.map(async fileHandle => {
+                    const file = await fileHandle.getFile();
+                    return file.text();
+                }));
+
+                // Combine all Java file contents
+                const combinedJavaContent = javaFileContents.join('\n\n');
+
+                // Display the combined content
+                document.getElementById('output').textContent = combinedJavaContent;
+
+                // Enable the download button and set its click handler
+                const downloadButton = document.getElementById('download-button');
+                downloadButton.style.display = 'block';
+                downloadButton.onclick = () => downloadFile(combinedJavaContent, 'combinedJavaContent.java');
+
+            } catch (error) {
+                console.error('Error accessing files:', error);
+                document.getElementById('output').textContent = 'Error accessing files: ' + error.message;
+            }
+        });
+
+        // Function to recursively get all .java files
+        async function getJavaFilesRecursively(directoryHandle, fileList) {
+            for await (const [name, handle] of directoryHandle.entries()) {
+                if (handle.kind === 'file' && name.endsWith('.java')) {
+                    fileList.push(handle);
+                } else if (handle.kind === 'directory') {
+                    await getJavaFilesRecursively(handle, fileList);
+                }
+            }
+        }
+
+        // Function to download a file
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
