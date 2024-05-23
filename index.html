@@ -236,17 +236,15 @@ main();</p>
             const consoleLogElement = document.getElementById('output');
             document.getElementById('output').innerText += "\n" + code;
             consoleLogElement.innerText += code;
-
+        
             const defs = findClassDef(code);
             const newDefs = defs.map(element => {
                 console.log(element);
-                return classDef(element);
+                return classDef(element.className, element.varName); // Pass className and varName separately
             });
-            
-            var i = 0;
-            for(const elements of newDefs){
-                i += 1;
-                code.replace(defs[i], newDefs[i]);
+        
+            for (let i = 0; i < defs.length; i++) { // Use a traditional for loop instead of for...of
+                code = code.replace(defs[i].varName, newDefs[i]); // Replace the variable names with new definitions
             }
             
             const result = eval(code);
