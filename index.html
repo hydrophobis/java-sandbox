@@ -174,7 +174,7 @@ main();</p>
             javaCode = javaCode.replace(/\bfor\b/g, 'for');
             javaCode = javaCode.replace(/\bwhile\b/g, 'while');
         
-            // Replace libraries and APIs
+            // Replace output
             javaCode = javaCode.replace(/System\.out\.println\((.*?)\);?/g, 'console.log($1);');
         
             // Replace exceptions
@@ -216,6 +216,7 @@ main();</p>
         function runCode(code) {
             code = parsejs(code);
             const consoleLogElement = document.getElementById('output');
+            document.getElementById('output').innerText += "\n" + result;
             consoleLogElement.innerText += code;
             const result = eval(code);
             document.getElementById('output').innerText = result;
