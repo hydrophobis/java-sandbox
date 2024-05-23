@@ -150,7 +150,7 @@ main();</p>
         function classDef(className, varName) {
             console.log(className);
             console.log(varName);
-            return "const " + varName + " = new " + className + "();";
+            return `const ${varName} = new ${className}();`;
         }
         
         function findClassDef(javaCode) {
