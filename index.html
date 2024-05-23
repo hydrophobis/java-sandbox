@@ -77,11 +77,6 @@
     <!-- Output container -->
     <pre id="output"></pre>
 
-    <!-- Include necessary libraries (e.g., javalang.js) -->
-    <!-- <script src="path/to/javalang.js"></script> -->
-    <script src="/lib/fs.js"></script>
-    <script src="parse.js"></script>
-
     <script>
         document.getElementById('open-folder-button').addEventListener('click', async function() {
             try {
@@ -98,12 +93,11 @@
                     return file.text();
                 }));
 
-                // Run each Java file content as JavaScript using eval()
+                // Run each Java file content as JavaScript using runCode()
                 javaFileContents.forEach(javaContent => {
                     try {
-                        // Convert Java content to JavaScript using your parser
+                        // Java content to JavaScript
                         const jsContent = parsejs(javaContent);
-                        // Run the JavaScript content using eval()
                         runCode(jsContent);
                     } catch (error) {
                         console.error('Error parsing or running Java code:', error);
@@ -183,7 +177,7 @@
             return javaCode;
         }
 
-        /*(function() {
+        (function() {
             const originalConsoleLog = console.log;
             const consoleLogElement = document.getElementById('consoleLog');
 
@@ -197,7 +191,7 @@
                     }
                 });
             };
-        })();*/
+        })();
 
         function runCode(code) {
             try {
