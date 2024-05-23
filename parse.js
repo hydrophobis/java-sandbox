@@ -7,7 +7,7 @@ export const JavaConstructs = {
 };
 
 // Function to parse Java code
-export function parseJavaCode(javaCode) {
+export function parse(javaCode) {
     // Split the code into lines
     const lines = javaCode.split('\n');
 
