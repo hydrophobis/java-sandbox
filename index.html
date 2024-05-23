@@ -165,7 +165,20 @@
             javaCode = javaCode.replace(/try/g, 'try');
             javaCode = javaCode.replace(/catch/g, 'catch');
             javaCode = javaCode.replace(/finally/g, 'finally');
-            // Add more replacements for other exception handling...
+            // Replace array declarations
+            javaCode = javaCode.replace(/\bString\[\]/g, 'Array');
+            // Add more replacements for other array types...
+        
+            // Replace array initialization
+            javaCode = javaCode.replace(/String\[\]/g, '[]');
+            // Add more replacements for other array initializations...
+        
+            // Replace method definitions with array parameters
+            javaCode = javaCode.replace(/public static void (\w+)\((String\[\] [^\)]*)\)/g, 'static $1($2)');
+            // Add more replacements for other method definitions with array parameters...
+        
+            // Replace array access
+            javaCode = javaCode.replace(/args\[(\d+)\]/g, 'args[$1]');
         
             return javaCode;
         }
