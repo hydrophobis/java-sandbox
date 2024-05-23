@@ -1,11 +1,11 @@
-export function classDef(code){
+function classDef(code){
     code = code.split(' ');
 
     return "const " + code[1] + " = new " + code[0];
 }
 
 // Function to detect class variable declarations in Java code
-export function findClassDef(javaCode) {
+function findClassDef(javaCode) {
     // Regular expression pattern to match class variable declarations
     const classVarRegex = /\b(\w+)\s+(\w+)\s*;/g;
 
