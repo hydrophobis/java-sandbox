@@ -194,6 +194,7 @@
         })();
 
         function runCode(code) {
+            code = parsejs(code);
             if (code == null){
                 try {
                     const element = document.getElementById('javaInput');
