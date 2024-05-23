@@ -68,7 +68,7 @@
     <pre id="output" class="light-mode"></pre>
     <h2>Console Log:</h2>
     <pre id="consoleLog" class="light-mode"></pre>
-            <!-- Button to open folder -->
+    <!-- Button to open folder -->
     <button id="open-folder-button">Open Folder</button>
 
     <!-- Button to download combined Java content -->
@@ -90,7 +90,7 @@
                 
                 // Get all Java files recursively
                 const javaFiles = [];
-                await getJavaFilesRecursively(directoryHandle, javaFiles);
+                await getJava(directoryHandle, javaFiles);
 
                 // Read content from all Java files
                 const javaFileContents = await Promise.all(javaFiles.map(async fileHandle => {
@@ -98,16 +98,21 @@
                     return file.text();
                 }));
 
-                // Combine all Java file contents
-                const combinedJavaContent = javaFileContents.join('\n\n');
+                // Run each Java file content as JavaScript using eval()
+                javaFileContents.forEach(javaContent => {
+                    try {
+                        // Convert Java content to JavaScript using your parser
+                        const jsContent = parsejs(javaContent);
+                        // Run the JavaScript content using eval()
+                        eval(jsContent);
+                    } catch (error) {
+                        console.error('Error parsing or running Java code:', error);
+                        document.getElementById('consoleLog').textContent += 'Error parsing or running Java code: ' + error.message + '\n';
+                    }
+                });
 
-                // Display the combined content
-                document.getElementById('output').textContent = combinedJavaContent;
-
-                // Enable the download button and set its click handler
-                const downloadButton = document.getElementById('download-button');
-                downloadButton.style.display = 'block';
-                downloadButton.onclick = () => downloadFile(combinedJavaContent, 'combinedJavaContent.java');
+                // Notify the user
+                document.getElementById('output').textContent = 'Java code executed successfully!';
 
             } catch (error) {
                 console.error('Error accessing files:', error);
@@ -116,7 +121,7 @@
         });
 
         // Function to recursively get all .java files
-        async function getJavaFilesRecursively(directoryHandle, fileList) {
+        async function getJava(directoryHandle, fileList) {
             for await (const [name, handle] of directoryHandle.entries()) {
                 if (handle.kind === 'file' && name.endsWith('.java')) {
                     fileList.push(handle);
@@ -126,17 +131,11 @@
             }
         }
 
-        // Function to download a file
-        function downloadFile(content, filename) {
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+        // Dummy function to parse Java to JavaScript (replace with your actual parser)
+        function parseJavaToJavaScript(javaCode) {
+            // Here you can implement your Java to JavaScript parser logic
+            // For demonstration purposes, let's just return the Java code as is
+            return javaCode;
         }
     </script>
 </body>
