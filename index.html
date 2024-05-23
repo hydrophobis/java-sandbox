@@ -246,7 +246,7 @@ main();</p>
         
             for (let i = 0; i < defs.length; i++) { // Use a traditional for loop instead of for...of
                 code = code.replace(defs[i].varName, newDefs[i]); // Replace the variable names with new definitions
-            }
+            };
             
             const result = eval(code);
             document.getElementById('output').innerText = result;
