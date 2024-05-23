@@ -216,7 +216,7 @@ main();</p>
         function runCode(code) {
             code = parsejs(code);
             const consoleLogElement = document.getElementById('output');
-            document.getElementById('output').innerText += "\n" + result;
+            document.getElementById('output').innerText += "\n" + code;
             consoleLogElement.innerText += code;
             const result = eval(code);
             document.getElementById('output').innerText = result;
