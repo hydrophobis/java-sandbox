@@ -249,7 +249,7 @@ main();</p>
             document.getElementById('output').innerText += "\n" + code;
             consoleLogElement.innerText += code;
 
-            const defs = findClassDef();
+            const defs = findClassDef(code);
             const newDefs = array.map(element => {
                 console.log(element);
                 return classDef(element);
