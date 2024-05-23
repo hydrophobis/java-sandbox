@@ -130,6 +130,57 @@
                 }
             }
         }
+
+        function parsejs(javaCode) {
+            // Replace data types
+            javaCode = javaCode.replace(/\bint\b/g, 'var');
+            javaCode = javaCode.replace(/\bdouble\b/g, 'var');
+            javaCode = javaCode.replace(/\bboolean\b/g, 'var');
+            // Add more replacements for other data types...
+        
+            // Replace variable declarations
+            javaCode = javaCode.replace(/\bvar\b/g, 'let');
+            // Add more replacements for other variable declarations...
+        
+            // Replace classes
+            javaCode = javaCode.replace(/public class (\w+)/g, 'class $1');
+            // Add more replacements for other class definitions...
+        
+            // Replace method definitions
+            javaCode = javaCode.replace(/public static void (\w+)\(([^)]*)\)/g, 'static $1($2)');
+            // Add more replacements for other method definitions...
+        
+            // Replace control structures
+            javaCode = javaCode.replace(/\bif\b/g, 'if');
+            javaCode = javaCode.replace(/\bfor\b/g, 'for');
+            javaCode = javaCode.replace(/\bwhile\b/g, 'while');
+            // Add more replacements for other control structures...
+        
+            // Replace libraries and APIs
+            javaCode = javaCode.replace(/\bSystem.out.println\b/g, 'console.log');
+            // Add more replacements for other libraries and APIs...
+        
+            // Replace exceptions
+            javaCode = javaCode.replace(/try/g, 'try');
+            javaCode = javaCode.replace(/catch/g, 'catch');
+            javaCode = javaCode.replace(/finally/g, 'finally');
+            // Replace array declarations
+            javaCode = javaCode.replace(/\bString\[\]/g, 'Array');
+            // Add more replacements for other array types...
+        
+            // Replace array initialization
+            javaCode = javaCode.replace(/String\[\]/g, '[]');
+            // Add more replacements for other array initializations...
+        
+            // Replace method definitions with array parameters
+            javaCode = javaCode.replace(/public static void (\w+)\((String\[\] [^\)]*)\)/g, 'static $1($2)');
+            // Add more replacements for other method definitions with array parameters...
+        
+            // Replace array access
+            javaCode = javaCode.replace(/args\[(\d+)\]/g, 'args[$1]');
+        
+            return javaCode;
+        }
     </script>
 </body>
 </html>
