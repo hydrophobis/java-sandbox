@@ -133,8 +133,40 @@
 
         // Dummy function to parse Java to JavaScript (replace with your actual parser)
         function parsejs(javaCode) {
-            // Here you can implement your Java to JavaScript parser logic
-            // For demonstration purposes, let's just return the Java code as is
+            // Replace data types
+            javaCode = javaCode.replace(/\bint\b/g, 'var');
+            javaCode = javaCode.replace(/\bdouble\b/g, 'var');
+            javaCode = javaCode.replace(/\bboolean\b/g, 'var');
+            // Add more replacements for other data types...
+        
+            // Replace variable declarations
+            javaCode = javaCode.replace(/\bvar\b/g, 'let');
+            // Add more replacements for other variable declarations...
+        
+            // Replace classes
+            javaCode = javaCode.replace(/public class (\w+)/g, 'class $1');
+            // Add more replacements for other class definitions...
+        
+            // Replace method definitions
+            javaCode = javaCode.replace(/public static void (\w+)\(([^)]*)\)/g, 'static $1($2)');
+            // Add more replacements for other method definitions...
+        
+            // Replace control structures
+            javaCode = javaCode.replace(/\bif\b/g, 'if');
+            javaCode = javaCode.replace(/\bfor\b/g, 'for');
+            javaCode = javaCode.replace(/\bwhile\b/g, 'while');
+            // Add more replacements for other control structures...
+        
+            // Replace libraries and APIs
+            javaCode = javaCode.replace(/\bSystem.out.println\b/g, 'console.log');
+            // Add more replacements for other libraries and APIs...
+        
+            // Replace exceptions
+            javaCode = javaCode.replace(/try/g, 'try');
+            javaCode = javaCode.replace(/catch/g, 'catch');
+            javaCode = javaCode.replace(/finally/g, 'finally');
+            // Add more replacements for other exception handling...
+        
             return javaCode;
         }
     </script>
