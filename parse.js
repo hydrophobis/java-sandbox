@@ -83,8 +83,7 @@ public class HelloWorld {
         String message = "Hello, World!";
         System.out.println(message);
     }
-}
-`;
+}`;
 
 // Parse the Java code
 export const parsedJavaCode = parseJavaCode(javaCode);
