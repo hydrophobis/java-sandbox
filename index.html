@@ -197,22 +197,8 @@
             code = parsejs(code);
             const consoleLogElement = document.getElementById('consoleLog');
             consoleLogElement.innerText += code;
-            if (code == null){
-                try {
-                    const element = document.getElementById('javaInput');
-                    const result = eval(element.value);
-                    document.getElementById('output').innerText = result;
-                } catch (error) {
-                    document.getElementById('output').innerText = 'Error: ' + error.message;
-                }
-            }
-            
-            try {
-                const result = eval(code);
-                document.getElementById('output').innerText = result;
-            } catch (error) {
-                document.getElementById('output').innerText = 'Error: ' + error.message;
-            }
+            const result = eval(code);
+            document.getElementById('output').innerText = result;
         }
     </script>
 </body>
