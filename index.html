@@ -183,7 +183,7 @@
             return javaCode;
         }
 
-        (function() {
+        /*(function() {
             const originalConsoleLog = console.log;
             const consoleLogElement = document.getElementById('consoleLog');
 
@@ -197,11 +197,11 @@
                     }
                 });
             };
-        })();
+        })();*/
 
         function runCode(code) {
             try {
-                const result = eval(code.value);
+                const result = eval(code);
                 document.getElementById('output').innerText = result;
             } catch (error) {
                 document.getElementById('output').innerText = 'Error: ' + error.message;
