@@ -199,9 +199,9 @@
             };
         })();
 
-        function runCode(const code) {
+        function runCode(code) {
             try {
-                const result = eval(code);
+                const result = eval(code.value);
                 document.getElementById('output').innerText = result;
             } catch (error) {
                 document.getElementById('output').innerText = 'Error: ' + error.message;
