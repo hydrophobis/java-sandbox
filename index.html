@@ -83,8 +83,8 @@ main();</p>
     <!-- Output container -->
     <pre id="output"></pre>
 
+    <script src="parse.js"></script>
     <script>
-        import { classDef, findClassDef } from "parse.js";
         document.getElementById('open-folder-button').addEventListener('click', async function() {
             try {
                 // Open a directory picker
@@ -221,6 +221,19 @@ main();</p>
             const consoleLogElement = document.getElementById('output');
             document.getElementById('output').innerText += "\n" + code;
             consoleLogElement.innerText += code;
+
+            const defs = findClassDef();
+            const newDefs = array.map(element => {
+                console.log(element);
+                return classDef(element);
+            });
+            
+            var i = 0;
+            for(const elements of newDefs){
+                i += 1;
+                code.replace(defs[i], newDefs[i]);
+            }
+            
             const result = eval(code);
             document.getElementById('output').innerText = result;
         }
