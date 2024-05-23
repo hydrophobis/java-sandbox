@@ -104,7 +104,7 @@
                         // Convert Java content to JavaScript using your parser
                         const jsContent = parsejs(javaContent);
                         // Run the JavaScript content using eval()
-                        eval(jsContent);
+                        runCode(jsContent);
                     } catch (error) {
                         console.error('Error parsing or running Java code:', error);
                         document.getElementById('consoleLog').textContent += 'Error parsing or running Java code: ' + error.message + '\n';
@@ -181,6 +181,31 @@
             javaCode = javaCode.replace(/args\[(\d+)\]/g, "");
         
             return javaCode;
+        }
+
+        (function() {
+            const originalConsoleLog = console.log;
+            const consoleLogElement = document.getElementById('consoleLog');
+
+            console.log = function(...args) {
+                originalConsoleLog.apply(console, args);
+                args.forEach(arg => {
+                    if (typeof arg === 'object') {
+                        consoleLogElement.innerText += JSON.stringify(arg, null, 2) + '\n';
+                    } else {
+                        consoleLogElement.innerText += arg + '\n';
+                    }
+                });
+            };
+        })();
+
+        function runCode(const code) {
+            try {
+                const result = eval(code);
+                document.getElementById('output').innerText = result;
+            } catch (error) {
+                document.getElementById('output').innerText = 'Error: ' + error.message;
+            }
         }
     </script>
 </body>
