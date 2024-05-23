@@ -125,6 +125,22 @@
             }
         }
 
+        function toggleDarkMode() {
+            const body = document.body;
+            const textarea = document.getElementById('jsInput');
+            const output = document.getElementById('output');
+            const consoleLog = document.getElementById('consoleLog');
+
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            textarea.classList.toggle('dark-mode');
+            textarea.classList.toggle('light-mode');
+            output.classList.toggle('dark-mode');
+            output.classList.toggle('light-mode');
+            consoleLog.classList.toggle('dark-mode');
+            consoleLog.classList.toggle('light-mode');
+        }
+
         function parsejs(javaCode) {
             // Replace data types
             javaCode = javaCode.replace(/\bint\b/g, 'var');
