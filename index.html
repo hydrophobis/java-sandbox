@@ -138,7 +138,8 @@ main();</p>
             const output = document.getElementById('output');
             const consoleLog = document.getElementById('consoleLog');
             const pre = document.getElementById('pre');
-            const btn = document.getElementById('button');
+            const fbtn = document.getElementById('open-folder-button');
+            const dbtn = document.getElementById('download-button');
 
             body.classList.toggle('dark-mode');
             body.classList.toggle('light-mode');
@@ -150,8 +151,10 @@ main();</p>
             consoleLog.classList.toggle('light-mode');
             pre.classlist.toggle('dark-mode');
             pre.classlist.toggle('light-mode');
-            btn.classlist.toggle('dark-mode');
-            btn.classlist.toggle('light-mode')
+            fbtn.classlist.toggle('dark-mode');
+            fbtn.classlist.toggle('light-mode');
+            dbtn.classlist.toggle('dark-mode');
+            dbtn.classlist.toggle('light-mode');
         }
 
         function classDef(className, varName) {
