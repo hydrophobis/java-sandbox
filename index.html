@@ -137,6 +137,7 @@ main();</p>
             const textarea = document.getElementById('jsInput');
             const output = document.getElementById('output');
             const consoleLog = document.getElementById('consoleLog');
+            const pre = document.getElementById('pre');
 
             body.classList.toggle('dark-mode');
             body.classList.toggle('light-mode');
@@ -146,6 +147,8 @@ main();</p>
             output.classList.toggle('light-mode');
             consoleLog.classList.toggle('dark-mode');
             consoleLog.classList.toggle('light-mode');
+            pre.classlist.toggle('dark-mode');
+            pre.classlist.toggle('light-mode');
         }
 
         function classDef(className, varName) {
