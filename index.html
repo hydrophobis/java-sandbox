@@ -158,8 +158,8 @@ main();</p>
             const matches = javaCode.matchAll(classVarRegex);
             const declarations = [];
             for (const match of matches) {
-                const className = match[1];
-                const varName = match[2];
+                const className = match[0];
+                const varName = match[1];
                 declarations.push({ className, varName });
             }
             return declarations;
