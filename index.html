@@ -148,8 +148,6 @@ main();</p>
         }
 
         function classDef(className, varName) {
-            console.log(className);
-            console.log(varName);
             return `const ${varName} = new ${className}();`;
         }
         
@@ -237,7 +235,6 @@ main();</p>
             code = parsejs(code); console.log(code);
             const consoleLogElement = document.getElementById('output');
             document.getElementById('output').innerText += "\n" + code;
-            consoleLogElement.innerText += code;
         
             const defs = findClassDef(code);
             const newDefs = defs.map(element => {
